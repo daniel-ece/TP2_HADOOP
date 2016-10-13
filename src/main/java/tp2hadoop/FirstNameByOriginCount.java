@@ -29,7 +29,7 @@ public class FirstNameByOriginCount {
             String itr = value.toString(); //get the value like (firstname;sexe;nationality1, nationality2, ...;number)
 
             String origins[] = itr.split(";"); // split by ";"
-            String origin[] = origins[2].split(","); // because he can have mutiple nationalities index:2
+            String origin[] = origins[2].split(", "); // because he can have mutiple nationalities index:2
 
             //(origin, 1)
             for (String o : origin) {
@@ -62,7 +62,7 @@ public class FirstNameByOriginCount {
         Configuration conf = new Configuration(); //provides access to configuration parameters
 
         //job allows use to configure the job, submit it, control its execution, and query the state
-        Job job = Job.getInstance(conf, "word count"); //create new job
+        Job job = Job.getInstance(conf, "firstnameByOriginCount"); //create new job
         job.setJarByClass(FirstNameByOriginCount.class); //set the job jar
 
         job.setMapperClass(FirstNameByOriginCount.TokenizerMapper.class); //mapper
