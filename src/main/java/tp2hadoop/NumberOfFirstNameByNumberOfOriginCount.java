@@ -27,12 +27,12 @@ public class NumberOfFirstNameByNumberOfOriginCount {
 
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 
-            String itr = value.toString(); //get the value like (firstname;sexe;nationality1, nationality2, ...;number)
+            String itr = value.toString(); //get the value like (firstname;gender;nationality1, nationality2, ...;number)
 
-            String origins[] = itr.split(";"); // split by ";"
-            String origin[] = origins[2].split(", "); // because he can have mutiple nationalities index:2
+            String data[] = itr.split(";"); // split by ";"
+            String origins[] = data[2].split(", "); // because he can have mutiple nationalities index:2
 
-            word.set(String.valueOf(origin.length)); //key = number of origins
+            word.set(String.valueOf(origins.length)); //key = number of origins
             context.write(word, one);
 
         }
