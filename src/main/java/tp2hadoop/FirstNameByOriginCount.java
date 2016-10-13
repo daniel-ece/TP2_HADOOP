@@ -39,7 +39,7 @@ public class FirstNameByOriginCount {
         }
     }
 
-    //function reducer that sum the value for the same key
+    //function reducer that involve all the values corresponding to the same key to a unique pair
     public static class IntSumReducer extends Reducer<Text,IntWritable,Text,IntWritable> {
         private IntWritable result = new IntWritable();
 
@@ -47,6 +47,7 @@ public class FirstNameByOriginCount {
 
             int sum = 0;
 
+            //simple sum of values
             for (IntWritable val : values) {
                 sum += val.get();
             }
@@ -55,6 +56,7 @@ public class FirstNameByOriginCount {
         }
     }
 
+    //function main
     public static void main(String[] args) throws Exception {
 
         Configuration conf = new Configuration(); //provides access to configuration parameters
