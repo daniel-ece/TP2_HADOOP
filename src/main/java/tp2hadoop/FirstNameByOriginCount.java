@@ -11,11 +11,11 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 /**
  * Created by Daniel on 13/10/2016.
  */
+//Count first name by origin input: prenoms.csv like(firstname;sexe;nationality1, nationality2, ...;number) ouput: origin, value
 public class FirstNameByOriginCount {
 
     //function mapper that return (key, value), value=1
@@ -39,16 +39,19 @@ public class FirstNameByOriginCount {
         }
     }
 
+    //function reducer that sum the value for the same key
     public static class IntSumReducer extends Reducer<Text,IntWritable,Text,IntWritable> {
         private IntWritable result = new IntWritable();
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+
             int sum = 0;
+
             for (IntWritable val : values) {
                 sum += val.get();
             }
-            result.set(sum);
-            context.write(key, result);
+            result.set(sum); //put the new value
+            context.write(key, result); //output (key, result)
         }
     }
 
